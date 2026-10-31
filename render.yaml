@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: multi-bot-support-manager
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MASTER_BOT_TOKEN
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: WEBHOOK_BASE_URL
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: MONGODB_DB_NAME
+        value: support_manager
+      - key: LOG_LEVEL
+        value: INFO
+      - key: PYTHON_VERSION
+        value: "3.11.9"
